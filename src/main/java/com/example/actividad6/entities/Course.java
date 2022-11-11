@@ -12,7 +12,7 @@ public class Course {
     private long Id;
     private String title;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course",cascade = CascadeType.REMOVE)
   private List <CourseMaterial> courseMaterial;
 
     public Course() {

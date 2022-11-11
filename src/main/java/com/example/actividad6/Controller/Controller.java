@@ -4,6 +4,7 @@ import com.example.actividad6.Repository.CourseMaterialRepository;
 import com.example.actividad6.Repository.CourseRepository;
 import com.example.actividad6.entities.Course;
 import com.example.actividad6.entities.CourseMaterial;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,7 @@ public List <CourseMaterial> getCourseMaterial(){
     public ResponseEntity<?> getCourse(@PathVariable long id) {
 
         Course course = courseRepository.findById(id).orElse(null);
+        System.out.println("Eager o Lazy");
         if (course == null) {
             return ResponseEntity.notFound().build();
         } else {
@@ -49,6 +51,18 @@ public List <CourseMaterial> getCourseMaterial(){
         }
 
     }
+
+
+    @GetMapping("Course/delete/{id}")
+    public ResponseEntity<?> deleteCourse(@PathVariable long id){
+        if (courseRepository.existsById(id)){
+            courseRepository.deleteById(id);
+            return ResponseEntity.ok(id);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
 
 
