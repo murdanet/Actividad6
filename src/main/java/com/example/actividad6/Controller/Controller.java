@@ -22,6 +22,8 @@ public class Controller {
 @Autowired
 private CourseMaterialRepository cmRepository;
 
+@Autowired
+
 
 @GetMapping("/allCourses")
 public ResponseEntity<?> getCourse() {

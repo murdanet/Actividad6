@@ -1,9 +1,12 @@
 package com.example.actividad6.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.actividad6.entities.Student;
 import javax.annotation.processing.Generated;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+
 
 @Entity
 public class Course {
@@ -12,8 +15,13 @@ public class Course {
     private long Id;
     private String title;
 
-    @OneToMany(mappedBy = "course",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "course",fetch = FetchType.LAZY)
   private List <CourseMaterial> courseMaterial;
+
+@ManyToMany(mappedBy = "cursos")
+@JsonIgnore
+private List<Student> students;
+
 
     public Course() {
 
